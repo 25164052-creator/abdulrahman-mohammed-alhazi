@@ -1,167 +1,58 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Awards Hub – Single File</title>
-  <style>
-    :root{
-      --bg: #f6f6f7; --card:#fff; --text:#111; --muted:#666; --brand:#0f172a;
-      --accent:#ff6a3d; --line:#e5e7eb; --chip:#111; --chipText:#fff;
-      --shadow: 0 8px 24px rgba(0,0,0,.08);
-      --skeleton1:#eee; --skeleton2:#ddd;
-    }
-    @media (prefers-color-scheme: dark){
-      :root{
-        --bg:#0b0c0f; --card:#111318; --text:#e9eef5; --muted:#9aa3af; --brand:#e2e8f0;
-        --accent:#ff8a5b; --line:#1f2937; --chip:#eaeef7; --chipText:#0b0c0f;
-        --shadow: 0 8px 24px rgba(0,0,0,.35);
-        --skeleton1:#1b1f2a; --skeleton2:#10131a;
-      }
-    }
-    html[data-theme="light"]{
-      --bg:#f6f6f7; --card:#fff; --text:#111; --muted:#666; --brand:#0f172a;
-      --accent:#ff6a3d; --line:#e5e7eb; --chip:#111; --chipText:#fff;
-      --shadow: 0 8px 24px rgba(0,0,0,.08);
-      --skeleton1:#eee; --skeleton2:#ddd;
-    }
-    html[data-theme="dark"]{
-      --bg:#0b0c0f; --card:#111318; --text:#e9eef5; --muted:#9aa3af; --brand:#e2e8f0;
-      --accent:#ff8a5b; --line:#1f2937; --chip:#eaeef7; --chipText:#0b0c0f;
-      --shadow: 0 8px 24px rgba(0,0,0,.35);
-      --skeleton1:#1b1f2a; --skeleton2:#10131a;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0c0f" media="(prefers-color-scheme: dark)">
+<title>AW — الرئيسية</title>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="preconnect" href="https://picsum.photos" crossorigin>
+<link rel="stylesheet" href="./assets/css/style.css">
+<script defer src="./assets/js/app.js"></script>
 
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1200px;margin:auto;padding:0 16px}
-    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
-
-    /* NAV */
-    .nav{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--card) 85%,transparent);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line)}
-    .nav .row{display:flex;align-items:center;gap:12px;height:64px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
-    .brand .logo{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--brand);color:var(--card)}
-    .nav-links{display:flex;gap:14px;margin-inline-start:16px}
-    .nav a:hover{opacity:.9}
-    .nav-tools{margin-inline-start:auto;display:flex;gap:8px;align-items:center}
-    .field{position:relative}
-    .field input{height:36px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--text);padding:0 36px 0 12px;outline:none}
-    .field .icon{position:absolute;right:10px;top:50%;translate:0 -50%;opacity:.6}
-
-    .btn{height:36px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);padding:0 12px;cursor:pointer}
-    .btn.brand{background:var(--brand);color:var(--card);border-color:transparent}
-    .btn.accent{background:var(--accent);color:#fff;border-color:transparent}
-    .btn:hover{filter:brightness(1.03)}
-
-    .nav.scrolled{box-shadow:var(--shadow)}
-
-    /* HERO */
-    .hero{margin:20px 0}
-    .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
-    .hero .media{position:relative;min-height:260px;background:
-      linear-gradient(120deg,rgba(0,0,0,.35),rgba(0,0,0,.1)),
-      url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat}
-    .hero .pill{position:absolute;top:12px;left:12px;display:flex;gap:8px}
-    .chip{display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;background:var(--chip);color:var(--chipText);font-size:12px}
-    .chip.outline{background:transparent;color:var(--text);border:1px solid var(--line)}
-    .hero .info{padding:18px}
-    .kpis{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .kpi{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px}
-    .hero .cta{display:flex;gap:8px;margin-top:16px}
-
-    /* TOOLBAR */
-    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0}
-    .toolbar .tags{display:flex;flex-wrap:wrap;gap:8px}
-    .tag{padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:transparent;cursor:pointer}
-    .tag.active{background:var(--brand);color:var(--card);border-color:transparent}
-    .sort{margin-inline-start:auto;display:flex;align-items:center;gap:8px}
-    select{height:36px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:0 10px}
-
-    /* GRID */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media (max-width:980px){.hero .wrap{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.grid{grid-template-columns:1fr}}
-
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);opacity:0;transform:translateY(16px);transition:opacity .5s ease, transform .5s ease}
-    .card.appear{opacity:1;transform:none}
-    .thumb{position:relative;aspect-ratio:16/10;background:linear-gradient(90deg,var(--skeleton1),var(--skeleton2),var(--skeleton1));background-size:200% 100%;animation:skeleton 1.1s linear infinite}
-    @keyframes skeleton{to{background-position: -200% 0}}
-    .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-    .score{position:absolute;top:10px;left:10px}
-    .score .chip{background:rgba(0,0,0,.7);color:#fff}
-
-    .body{padding:14px}
-    .title{font-weight:700}
-    .meta{color:var(--muted);font-size:13px;margin-top:4px}
-    .actions{display:flex;gap:8px;align-items:center;margin-top:10px}
-    .votes{font-size:12px;color:var(--muted)}
-    .btn.small{height:32px}
-
-    /* MODAL */
-    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.45)}
-    .modal.open{display:grid}
-    .dialog{width:min(520px,94vw);background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px}
-    .dialog header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .sliders{display:grid;gap:10px;margin-top:8px}
-    .row{display:grid;grid-template-columns:140px 1fr 52px;gap:10px;align-items:center}
-    input[type="range"]{width:100%}
-    .bar{height:7px;background:var(--line);border-radius:999px;overflow:hidden}
-    .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#ffb08f)}
-    .total{margin-top:8px;display:flex;justify-content:space-between;align-items:center}
-    .dialog footer{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
-    .close{border:1px solid var(--line);background:transparent}
-
-    /* TOOLS */
-    .theme{border-radius:10px;border:1px solid var(--line);background:var(--card);height:36px;width:36px;display:grid;place-items:center;cursor:pointer}
-    .to-top{position:fixed;bottom:16px;left:16px;display:none}
-    .to-top.show{display:block}
-
-    /* helper */
-    .muted{color:var(--muted)}
-  </style>
 </head>
-<body>
-  <!-- NAV -->
-  <nav class="nav" id="nav" aria-label="التنقل الرئيسي">
-    <div class="container row">
-      <a class="brand" href="#">
-        <span class="logo">A*</span><span>AWARDS HUB</span>
-      </a>
-      <div class="nav-links">
-        <a href="#winners">الفائز اليوم</a>
-        <a href="#nominees">المرشحون</a>
-        <a href="#submit">الإرسال</a>
-      </div>
-      <div class="nav-tools">
-        <div class="field" role="search">
-          <label class="visually-hidden" for="q">بحث</label>
-          <input id="q" placeholder="ابحث عن موقع، استوديو…" />
-          <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </div>
-        <button id="themeBtn" class="theme" title="تبديل الوضع" aria-label="تبديل الوضع">
-          <svg id="sun" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><g stroke="currentColor" stroke-width="2" fill="none"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg>
-        </button>
-        <button class="btn brand">إنشاء حساب</button>
-        <button class="btn accent">أرسل موقعك</button>
-      </div>
-    </div>
-  </nav>
+<body data-page="index">
+  <nav class="nav" id="nav" aria-label="Main">
+  <div class="container nav-row">
+    <a class="brand" href="./index.html">
+      <span class="logo">A*</span><span class="brand-text">AWARDS HUB</span>
+    </a>
 
-  <!-- HERO -->
-  <header class="hero container" id="winners">
-    <div class="wrap">
-      <div class="media" role="img" aria-label="Site of the Day – صورة غلاف">
-        <div class="pill">
+    <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-controls="navMenu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="./winners.html" data-link="winners">الفائزون</a>
+      <a href="./nominees.html" data-link="nominees">المرشحون</a>
+      <a href="./submit.html" data-link="submit">الإرسال</a>
+    </div>
+
+    <div class="nav-tools">
+      <button id="themeBtn" class="btn icon" title="Theme" aria-label="Theme">🌓</button>
+    </div>
+  </div>
+</nav>
+  <header class="hero">
+    <div class="container hero-wrap">
+      <div class="hero-media">
+        <picture>
+          <source media="(min-width: 1024px)" srcset="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop 1600w">
+          <source media="(min-width: 640px)" srcset="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop 1200w">
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800&auto=format&fit=crop" alt="Site of the Day" loading="eager"
+               sizes="(min-width:1280px) 1100px, (min-width:768px) 90vw, 100vw">
+        </picture>
+        <div class="pill-row">
           <span class="chip">Site of the Day</span>
           <span class="chip outline">اليوم</span>
         </div>
       </div>
-      <div class="info">
-        <div class="muted">الفائز المميز</div>
-        <h1 style="margin:8px 0 0">NITEX — Digital Fabric Commerce</h1>
-        <p class="muted" style="margin:6px 0 0">تجربة تجارة إلكترونية بمؤثرات حركة وجماليات تيبوغرافيا</p>
+      <div class="hero-info">
+        <p class="muted">الفائز المميز</p>
+        <h1 class="hero-title">NITEX — Digital Fabric Commerce</h1>
+        <p class="muted">تجربة تجارة إلكترونية بمؤثرات حركة وجماليات تيبوغرافيا</p>
         <div class="kpis">
           <span class="kpi">Design 7.8</span>
           <span class="kpi">Usability 7.3</span>
@@ -169,325 +60,53 @@
           <span class="kpi">Content 7.1</span>
         </div>
         <div class="cta">
-          <a class="btn brand" href="#" target="_blank" rel="noreferrer">شاهد الحالة</a>
-          <a class="btn" href="#nominees">كل الفائزين</a>
+          <a class="btn brand" href="./winners.html">شاهد الفائزين</a>
+          <a class="btn" href="./nominees.html">تصفّح المرشحين</a>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- TOOLBAR -->
-  <section class="container toolbar" aria-label="أدوات التصفية">
-    <div class="tags" id="tags"></div>
-    <div class="sort">
-      <label for="sortSel">الترتيب:</label>
-      <select id="sortSel" aria-label="اختيار ترتيب">
-        <option value="top">الأعلى تقييمًا</option>
-        <option value="votes">الأكثر تصويتًا</option>
-        <option value="az">أبجديًا</option>
-      </select>
-    </div>
+  <section class="container section">
+    <h2 class="h2">مختارات اليوم</h2>
+    <div id="homeGrid" class="grid auto-fit"></div>
   </section>
 
-  <!-- GRID -->
-  <main class="container" id="nominees" aria-live="polite">
-    <div id="grid" class="grid"></div>
-  </main>
-
-  <!-- TO TOP -->
-  <button id="toTop" class="btn to-top">↑ للأعلى</button>
-
-  <!-- MODAL -->
-  <div id="modal" class="modal" aria-hidden="true" aria-labelledby="voteTitle" role="dialog">
-    <div class="dialog" role="document">
-      <header>
-        <h3 id="voteTitle">تصويت للموقع</h3>
-        <button class="btn close" id="closeModal" aria-label="إغلاق">إغلاق</button>
-      </header>
-      <div class="sliders">
-        <div class="row">
-          <label>Design (40%)</label>
-          <input id="sDesign" type="range" min="0" max="10" step="0.1" value="7.5" />
-          <output id="oDesign">7.5</output>
-        </div>
-        <div class="row">
-          <label>Usability (30%)</label>
-          <input id="sUsability" type="range" min="0" max="10" step="0.1" value="7.5" />
-          <output id="oUsability">7.5</output>
-        </div>
-        <div class="row">
-          <label>Creativity (20%)</label>
-          <input id="sCreativity" type="range" min="0" max="10" step="0.1" value="7.5" />
-          <output id="oCreativity">7.5</output>
-        </div>
-        <div class="row">
-          <label>Content (10%)</label>
-          <input id="sContent" type="range" min="0" max="10" step="0.1" value="7.5" />
-          <output id="oContent">7.5</output>
-        </div>
-      </div>
-      <div class="total">
-        <div>النتيجة الموزونة الحالية: <strong id="weighted">7.5</strong> / 10</div>
-        <div class="bar" style="width:160px"><i id="bar" style="width:75%"></i></div>
-      </div>
-      <footer>
-        <button class="btn" id="resetScores">إعادة</button>
-        <button class="btn accent" id="submitVote">تأكيد التصويت</button>
-      </footer>
-    </div>
+  <footer class="foot" id="submit">
+  <div class="container">
+    <hr>
+    <p>© 2025 Awards Hub — نسخة متوافقة مع الحاسوب والجوال (HTML+CSS+JS)</p>
   </div>
+</footer>
 
-  <footer class="container" style="padding:40px 0;color:var(--muted);text-align:center" id="submit">
-    <hr style="border:none;border-top:1px solid var(--line);margin-bottom:16px"/>
-    <div>© 2025 Awards Hub — صفحة تجريبية (HTML+CSS+JS فقط)</div>
-  </footer>
 
-  <script>
-    // -------------------------------
-    // بيانات مبدئية
-    // -------------------------------
-    const TAGS = ["Portfolio","E-commerce","3D","Motion","Experimental"];
-    const PROJECTS = [
-      {id:1,title:"Creative Portfolio", studio:"Atlas Lab", country:"ES", tag:"Portfolio", img:"https://picsum.photos/seed/p1/800/500", base:{d:7.6,u:7.2,c:7.9,t:7.1}, votes:12},
-      {id:2,title:"Smooth Commerce", studio:"Kali Works", country:"US", tag:"E-commerce", img:"https://picsum.photos/seed/p2/800/500", base:{d:7.8,u:7.3,c:7.4,t:7.0}, votes:18},
-      {id:3,title:"Orbit 3D", studio:"Nova Studio", country:"FR", tag:"3D", img:"https://picsum.photos/seed/p3/800/500", base:{d:7.4,u:6.9,c:8.2,t:6.8}, votes:9},
-      {id:4,title:"Playful Motion", studio:"Desert Pixel", country:"JP", tag:"Motion", img:"https://picsum.photos/seed/p4/800/500", base:{d:7.5,u:7.0,c:7.9,t:7.0}, votes:7},
-      {id:5,title:"Lab Experiments", studio:"Nova Studio", country:"DE", tag:"Experimental", img:"https://picsum.photos/seed/p5/800/500", base:{d:7.1,u:6.8,c:8.3,t:6.6}, votes:5},
-      {id:6,title:"Fashion Grid", studio:"Atlas Lab", country:"YE", tag:"E-commerce", img:"https://picsum.photos/seed/p6/800/500", base:{d:7.3,u:7.5,c:7.0,t:7.2}, votes:14},
-      {id:7,title:"Neon Motion", studio:"Kali Works", country:"AE", tag:"Motion", img:"https://picsum.photos/seed/p7/800/500", base:{d:7.7,u:7.1,c:7.8,t:6.9}, votes:6},
-      {id:8,title:"Particles 3D", studio:"Nova Studio", country:"MA", tag:"3D", img:"https://picsum.photos/seed/p8/800/500", base:{d:7.2,u:6.7,c:8.4,t:6.7}, votes:10},
-    ];
-    const W = {d:0.4,u:0.3,c:0.2,t:0.1};
-
-    // استرجاع/تخزين محلي للتصويتات وثيم
-    const store = {
-      getVotes(){ try{return JSON.parse(localStorage.getItem("votes")||"{}")}catch{return {}} },
-      setVotes(v){ localStorage.setItem("votes", JSON.stringify(v)) },
-      getTheme(){ return localStorage.getItem("theme") },
-      setTheme(v){ localStorage.setItem("theme", v) },
-    };
-
-    // -------------------------------
-    // عناصر DOM
-    // -------------------------------
-    const grid = document.getElementById("grid");
-    const q = document.getElementById("q");
-    const tagsWrap = document.getElementById("tags");
-    const sortSel = document.getElementById("sortSel");
-    const nav = document.getElementById("nav");
-    const toTop = document.getElementById("toTop");
-    const themeBtn = document.getElementById("themeBtn");
-
-    // Modal
-    const modal = document.getElementById("modal");
-    const closeModal = document.getElementById("closeModal");
-    const sD = document.getElementById("sDesign");
-    const sU = document.getElementById("sUsability");
-    const sC = document.getElementById("sCreativity");
-    const sT = document.getElementById("sContent");
-    const oD = document.getElementById("oDesign");
-    const oU = document.getElementById("oUsability");
-    const oC = document.getElementById("oCreativity");
-    const oT = document.getElementById("oContent");
-    const weighted = document.getElementById("weighted");
-    const bar = document.getElementById("bar");
-    const resetBtn = document.getElementById("resetScores");
-    const submitVote = document.getElementById("submitVote");
-
-    // حالة واجهة
-    let activeTag = null;
-    let activeProject = null;
-
-    // -------------------------------
-    // وظائف مساعدة
-    // -------------------------------
-    const avg = (a,b,c,d)=> (a*W.d + b*W.u + c*W.c + d*W.t);
-    function formatScore(x){ return (Math.round(x*100)/100).toFixed(2) }
-    function totalFor(p, votesMap){
-      const v = votesMap[p.id] || null;
-      if(!v) return { score: avg(p.base.d,p.base.u,p.base.c,p.base.t), votes:p.votes };
-      const cnt = p.votes + v.count;
-      const sBase = p.votes * avg(p.base.d,p.base.u,p.base.c,p.base.t);
-      const sUser = v.sum;
-      return { score: (sBase + sUser)/cnt, votes: cnt };
-    }
-
-    // -------------------------------
-    // إنشاء الفلاتر
-    // -------------------------------
-    function buildTags(){
-      tagsWrap.innerHTML = "";
-      const all = document.createElement("button");
-      all.className = "tag" + (!activeTag ? " active":"");
-      all.textContent = "الكل";
-      all.addEventListener("click",()=>{activeTag=null; buildTags(); render()});
-      tagsWrap.appendChild(all);
-
-      TAGS.forEach(t=>{
-        const btn = document.createElement("button");
-        btn.className = "tag" + (activeTag===t ? " active":"");
-        btn.textContent = t;
-        btn.addEventListener("click",()=>{activeTag = (activeTag===t? null : t); buildTags(); render()});
-        tagsWrap.appendChild(btn);
-      });
-    }
-
-    // -------------------------------
-    // بناء بطاقة مشروع
-    // -------------------------------
-    function cardTemplate(p, score, votes){
-      const el = document.createElement("article");
-      el.className = "card";
-      el.setAttribute("tabindex","0");
+  <script defer src="./assets/js/data.js"></script>
+  <script defer>
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('homeGrid');
+    const picks = PROJECTS.slice(0,8);
+    picks.forEach(p => {
+      const el = document.createElement('article');
+      el.className = 'card appear';
       el.innerHTML = `
         <div class="thumb">
-          <div class="score"><span class="chip" title="النتيجة الحالية">${formatScore(score)}</span></div>
-          <img loading="lazy" src="${p.img}" alt="${p.title}" />
+          <picture>
+            <source media="(min-width:1024px)" srcset="https://picsum.photos/seed/p${p.id}/1200/750 1200w">
+            <source media="(min-width:640px)" srcset="https://picsum.photos/seed/p${p.id}/800/500 800w">
+            <img loading="lazy" src="https://picsum.photos/seed/p${p.id}/600/400" alt="${p.title}"
+                 sizes="(min-width:1280px) 320px, (min-width:768px) 33vw, 100vw">
+          </picture>
         </div>
         <div class="body">
-          <div class="title">${p.title}</div>
-          <div class="meta">${p.studio} • ${p.country} • <span class="muted">${p.tag}</span></div>
+          <div class="title">\${p.title}</div>
+          <div class="meta">\${p.studio} • \${p.country} • <span class="muted">\${p.tag}</span></div>
           <div class="actions">
-            <button class="btn small voteBtn" data-id="${p.id}">صوّت</button>
-            <span class="votes" aria-label="عدد الأصوات">الأصوات: <b>${votes}</b></span>
+            <a class="btn small" href="./nominees.html#card-\${p.id}">التفاصيل</a>
           </div>
-        </div>
-      `;
-      // skeleton off when image loads
-      const img = el.querySelector("img");
-      img.addEventListener("load",()=> el.querySelector(".thumb").style.animation="none");
-      return el;
-    }
-
-    // -------------------------------
-    // رسم الشبكة
-    // -------------------------------
-    function render(){
-      const votesMap = store.getVotes();
-      let list = PROJECTS.slice();
-
-      // Search
-      const needle = q.value.trim().toLowerCase();
-      if(needle){
-        list = list.filter(p =>
-          (p.title+p.studio+p.country+p.tag).toLowerCase().includes(needle)
-        );
-      }
-
-      // Tag
-      if(activeTag) list = list.filter(p=> p.tag===activeTag);
-
-      // Map scores
-      const scored = list.map(p=>{
-        const {score, votes} = totalFor(p, votesMap);
-        return {...p, _score:score, _votes:votes};
-      });
-
-      // Sort
-      const s = sortSel.value;
-      if(s==="top") scored.sort((a,b)=> b._score - a._score);
-      if(s==="votes") scored.sort((a,b)=> b._votes - a._votes);
-      if(s==="az") scored.sort((a,b)=> a.title.localeCompare(b.title));
-
-      // Paint
-      grid.innerHTML = "";
-      scored.forEach(p=>{
-        const card = cardTemplate(p, p._score, p._votes);
-        grid.appendChild(card);
-        io.observe(card); // appear animation
-      });
-    }
-
-    // -------------------------------
-    // Modal & Voting
-    // -------------------------------
-    function openModal(pid){
-      activeProject = PROJECTS.find(x=>x.id===pid);
-      if(!activeProject) return;
-      document.getElementById("voteTitle").textContent = "التصويت: " + activeProject.title;
-      resetScoresTo(7.5);
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden","false");
-      submitVote.focus();
-      updatePreview();
-    }
-    function close(){
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden","true");
-      activeProject = null;
-    }
-    function updatePreview(){
-      oD.textContent = sD.value; oU.textContent = sU.value; oC.textContent = sC.value; oT.textContent = sT.value;
-      const w = avg(+sD.value,+sU.value,+sC.value,+sT.value);
-      weighted.textContent = formatScore(w);
-      bar.style.width = (w*10) + "%";
-    }
-    function resetScoresTo(v){
-      [sD,sU,sC,sT].forEach(i=> i.value = v);
-      updatePreview();
-    }
-
-    // حفظ التصويت: نجمع مجموع النقاط وعدّاد للتجميع
-    function saveVote(){
-      if(!activeProject) return;
-      const w = avg(+sD.value,+sU.value,+sC.value,+sT.value);
-      const votes = store.getVotes();
-      const rec = votes[activeProject.id] || {count:0,sum:0};
-      rec.count += 1; rec.sum += w;
-      votes[activeProject.id] = rec;
-      store.setVotes(votes);
-      close();
-      render();
-    }
-
-    // -------------------------------
-    // أحداث عامة
-    // -------------------------------
-    // Debounce للبحث
-    let tId;
-    q.addEventListener("input", ()=>{ clearTimeout(tId); tId = setTimeout(render, 160) });
-    sortSel.addEventListener("change", render);
-
-    // فتح/إغلاق المودال
-    document.addEventListener("click", (e)=>{
-      const vote = e.target.closest(".voteBtn");
-      if(vote) openModal(+vote.dataset.id);
-      if(e.target === modal) close();
+        </div>`;
+      grid.appendChild(el);
     });
-    closeModal.addEventListener("click", close);
-    submitVote.addEventListener("click", saveVote);
-    resetBtn.addEventListener("click", ()=> resetScoresTo(7.5));
-    [sD,sU,sC,sT].forEach(i=> i.addEventListener("input", updatePreview));
-    document.addEventListener("keydown", (e)=>{ if(e.key==="Escape" && modal.classList.contains("open")) close() });
-
-    // Scroll helpers
-    window.addEventListener("scroll", ()=>{
-      nav.classList.toggle("scrolled", window.scrollY>10);
-      toTop.classList.toggle("show", window.scrollY>400);
-    });
-    toTop.addEventListener("click", ()=> window.scrollTo({top:0,behavior:"smooth"}));
-
-    // دخول لطيف للبطاقات
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("appear"); io.unobserve(en.target) } })
-    }, {threshold:.12});
-
-    // Theme
-    function applyTheme(val){
-      document.documentElement.setAttribute("data-theme", val||"");
-    }
-    const savedTheme = store.getTheme();
-    if(savedTheme) applyTheme(savedTheme);
-    themeBtn.addEventListener("click", ()=>{
-      const cur = document.documentElement.getAttribute("data-theme");
-      const next = cur==="dark" ? "light" : "dark";
-      applyTheme(next);
-      store.setTheme(next);
-    });
-
-    // ابدأ
-    buildTags();
-    render();
+  });
   </script>
 </body>
 </html>

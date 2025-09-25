@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0c0f" media="(prefers-color-scheme: dark)">
+<title>AW — المرشحون</title>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="preconnect" href="https://picsum.photos" crossorigin>
+<link rel="stylesheet" href="./assets/css/style.css">
+<script defer src="./assets/js/app.js"></script>
+<script defer src="./assets/js/data.js"></script>
+</head>
+<body data-page="nominees">
+  <nav class="nav" id="nav" aria-label="Main">
+  <div class="container nav-row">
+    <a class="brand" href="./index.html">
+      <span class="logo">A*</span><span class="brand-text">AWARDS HUB</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-controls="navMenu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="./winners.html" data-link="winners">الفائزون</a>
+      <a href="./nominees.html" data-link="nominees">المرشحون</a>
+      <a href="./submit.html" data-link="submit">الإرسال</a>
+    </div>
+
+    <div class="nav-tools">
+      <button id="themeBtn" class="btn icon" title="Theme" aria-label="Theme">🌓</button>
+    </div>
+  </div>
+</nav>
+
+  <section class="container section toolbar">
+    <div class="filters">
+      <div class="tags" id="tags"></div>
+    </div>
+    <div class="controls">
+      <label class="lbl" for="sortSel">الترتيب:</label>
+      <select id="sortSel" aria-label="Sort">
+        <option value="top">الأعلى تقييمًا</option>
+        <option value="votes">الأكثر تصويتًا</option>
+        <option value="az">أبجديًا</option>
+      </select>
+    </div>
+  </section>
+
+  <main class="container section">
+    <div id="grid" class="grid auto-fit"></div>
+  </main>
+
+  <div id="modal" class="modal" aria-hidden="true" role="dialog">
+    <div class="dialog" role="document">
+      <header class="dialog-head">
+        <h3 id="voteTitle">تصويت للموقع</h3>
+        <button class="btn close" id="closeModal" aria-label="إغلاق">✕</button>
+      </header>
+      <div class="sliders">
+        <div class="row"><label>Design (40%)</label><input id="sDesign" type="range" min="0" max="10" step="0.1" value="7.5" /><output id="oDesign">7.5</output></div>
+        <div class="row"><label>Usability (30%)</label><input id="sUsability" type="range" min="0" max="10" step="0.1" value="7.5" /><output id="oUsability">7.5</output></div>
+        <div class="row"><label>Creativity (20%)</label><input id="sCreativity" type="range" min="0" max="10" step="0.1" value="7.5" /><output id="oCreativity">7.5</output></div>
+        <div class="row"><label>Content (10%)</label><input id="sContent" type="range" min="0" max="10" step="0.1" value="7.5" /><output id="oContent">7.5</output></div>
+      </div>
+      <div class="total">
+        <div>النتيجة الحالية: <strong id="weighted">7.5</strong> / 10</div>
+        <div class="bar" style="width:100%"><i id="bar" style="width:75%"></i></div>
+      </div>
+      <footer class="dialog-foot">
+        <button class="btn" id="resetScores">إعادة</button>
+        <button class="btn accent" id="submitVote">تأكيد التصويت</button>
+      </footer>
+    </div>
+  </div>
+
+  <footer class="foot" id="submit">
+  <div class="container">
+    <hr>
+    <p>© 2025 Awards Hub — نسخة متوافقة مع الحاسوب والجوال (HTML+CSS+JS)</p>
+  </div>
+</footer>
+
+</body>
+</html>

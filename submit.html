@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0c0f" media="(prefers-color-scheme: dark)">
+<title>AW — إرسال موقع</title>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="preconnect" href="https://picsum.photos" crossorigin>
+<link rel="stylesheet" href="./assets/css/style.css">
+<script defer src="./assets/js/app.js"></script>
+
+</head>
+<body data-page="submit">
+  <nav class="nav" id="nav" aria-label="Main">
+  <div class="container nav-row">
+    <a class="brand" href="./index.html">
+      <span class="logo">A*</span><span class="brand-text">AWARDS HUB</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-controls="navMenu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="./winners.html" data-link="winners">الفائزون</a>
+      <a href="./nominees.html" data-link="nominees">المرشحون</a>
+      <a href="./submit.html" data-link="submit">الإرسال</a>
+    </div>
+
+    <div class="nav-tools">
+      <button id="themeBtn" class="btn icon" title="Theme" aria-label="Theme">🌓</button>
+    </div>
+  </div>
+</nav>
+  <section class="container section">
+    <h1 class="h2">أرسل موقعك</h1>
+    <form id="submitForm" class="form">
+      <label>اسم المشروع<input required name="title" placeholder="اسم الموقع"></label>
+      <label>رابط الموقع<input required name="url" type="url" placeholder="https://example.com"></label>
+      <label>الاستوديو/الفريق<input name="studio" placeholder="اسم الاستوديو"></label>
+      <label>بلد المنشأ<input name="country" placeholder="SA, EG, ..."></label>
+      <label>فئة<span class="muted">(Portfolio, Motion, ...)</span><input name="tag" placeholder="Portfolio"></label>
+      <button class="btn accent" type="submit">إرسال</button>
+    </form>
+    <div id="msg" class="muted" style="margin-top:10px"></div>
+  </section>
+  <footer class="foot" id="submit">
+  <div class="container">
+    <hr>
+    <p>© 2025 Awards Hub — نسخة متوافقة مع الحاسوب والجوال (HTML+CSS+JS)</p>
+  </div>
+</footer>
+
+  <script defer>
+    document.getElementById('submitForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      document.getElementById('msg').textContent = 'تم الاستلام محليًا ✅ — (يمكن ربطه لاحقًا بـ Google Forms أو API)';
+      e.target.reset();
+      console.log('Submitted demo data:', data);
+    });
+  </script>
+</body>
+</html>
